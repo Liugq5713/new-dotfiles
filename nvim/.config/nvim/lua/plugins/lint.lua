@@ -4,7 +4,8 @@ return {
   opts = {
     linters = {
       ["markdownlint-cli2"] = {
-        args = { "--config", "/Users/liuguangqi/.config/nvim/.markdownlint-cli2.yaml", "--" },
+        -- #3: 用 vim.fn.stdpath 替代硬编码路径，跨机器可移植
+        args = { "--config", vim.fn.stdpath("config") .. "/.markdownlint-cli2.yaml", "--" },
       },
     },
   },

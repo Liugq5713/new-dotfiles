@@ -28,6 +28,15 @@ info "Using dotfiles directory: $DOTFILES_DIR"
 info "Target: $HOME"
 echo ""
 
+# 安装 alacritty 主题（在 .gitignore 中排除，需要单独 clone）
+ALACRITTY_THEMES_DIR="$DOTFILES_DIR/alacritty/.config/alacritty/themes"
+if [ ! -d "$ALACRITTY_THEMES_DIR" ]; then
+    info "Cloning alacritty themes..."
+    git clone --depth 1 https://github.com/alacritty/alacritty-theme.git "$ALACRITTY_THEMES_DIR"
+else
+    info "Alacritty themes already exist, skipping."
+fi
+
 # 逐个包执行 stow
 for pkg in "${PACKAGES[@]}"; do
     if [ -d "$DOTFILES_DIR/$pkg" ]; then

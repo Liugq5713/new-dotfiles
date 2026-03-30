@@ -1,95 +1,66 @@
-# TokyoNight Alacritty Colors
-# Default colors
+# #1 主题：import 引用而非内联，方便一键切换主题
+import = [
+  "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
+]
+
+# #1 自定义背景色覆盖（import 之后的同 key 会覆盖主题值）
+# 原始 storm 主题为 #24283b，这里微调为稍深的蓝灰
 [colors.primary]
 background = '#23283a'
-foreground = '#c0caf5'
 
-# [colors.cursor]
-# cursor = '#c0caf5'
-# text = '#24283b'
+# #6 显式声明，方便调试时临时关闭
+[general]
+live_config_reload = true
 
-# Normal colors
-[colors.normal]
-black = '#1d202f'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#a9b1d6'
-
-# Bright colors
-[colors.bright]
-black = '#414868'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#c0caf5'
-
-# Indexed Colors
-[[colors.indexed_colors]]
-index = 16
-color = '#ff9e64'
-
-[[colors.indexed_colors]]
-index = 17
-color = '#db4b4b'
-
-[colors.cursor]
-cursor = "CellForeground"
-text = "CellBackground"
-
-[colors.selection]
-background = "CellForeground"
-text = "CellBackground"
- 
-[colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
- 
+# #2 TERM 保留 xterm-256color，需配合 tmux 的 terminal-overrides 启用 true color
 [env]
 TERM = "xterm-256color"
- 
+
+# #3 窗口配置
+[window]
+padding = { x = 8, y = 4 }
+dynamic_padding = true
+# macOS 上让 Option 键作为 Alt，否则 nvim 中 <M-j> 等绑定无法工作
+option_as_alt = "Both"
+
+# #4 滚动缓冲区：默认 10000 行，长时间构建日志容易溢出
+[scrolling]
+history = 50000
+multiplier = 3
+
 [font]
 size = 16
- 
-[font.bold]
-family = "FiraCode Nerd Font"
-style = "Bold"
- 
-[font.bold_italic]
-family = "FiraCode Nerd Font"
-style = "Bold Italic"
- 
-[font.italic]
-family = "FiraCode Nerd Font"
-style = "Italic"
- 
+
 [font.normal]
 family = "FiraCode Nerd Font"
 style = "Regular"
- 
-[[keyboard.bindings]]
-action = "ReceiveChar"
-key = "Back"
- 
-[[keyboard.bindings]]
-action = "Paste"
-key = "Paste"
- 
-[[keyboard.bindings]]
-action = "Copy"
-key = "Copy"
 
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Bold Italic"
+
+# #9 光标配置：配合 zsh vi 模式，insert 用 Beam，normal 用 Block
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+vi_mode_style = { shape = "Block", blinking = "Off" }
+blink_interval = 500
+blink_timeout = 0
+
+# #5 键盘绑定：只保留有实际意义的，删除了 Back/Paste/Copy 三个默认行为
 [[keyboard.bindings]]
 key = "t"
-mods="Command"
+mods = "Command"
 action = "None"
 
+# #10 清理了末尾多余的空格和制表符
 [selection]
 save_to_clipboard = true
-semantic_escape_chars = ",│`|:\"' ()[]{}<>    "
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"

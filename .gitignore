@@ -4,5 +4,8 @@ tmux/.config/tmux/plugins/
 # Neovim plugin cache and state
 nvim/.config/nvim/plugin/
 
+# Alacritty themes (cloned at install time, 148 files we don't need in git)
+alacritty/.config/alacritty/themes/
+
 # OS files
 .DS_Store

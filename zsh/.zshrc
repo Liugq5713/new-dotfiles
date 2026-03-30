@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-export LANG=zh_CN.UTF-8
-
 set -o vi
 
 # If you come from bash you might have to change your $PATH.
@@ -114,19 +111,11 @@ bindkey '  ' autosuggest-accept
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ssh-dev='ssh liuguangqi@xxx'
-alias go-mysql='mycli -h xxx -P 3306 -u root entrance'
-
-alias tol="cd ~/Growth/Liugq5713.github.io"
-
-
 alias vi="nvim"
 alias vim="nvim"
-alias vjs="vi $HOME/temp/test.js"
 alias vred="vi $HOME/growth/wiki/docs/work/red/README.md"
 alias vq="vi  $HOME/growth/wiki/docs/daily/quick.md"
 
-alias tohr='cd ~/workspace/ehr-core'
 alias fvi='nvim $(fzf)'
 alias fgco='git branch --sort=-committerdate | fzf | xargs git checkout'
 alias fcd='cd $(find * -type d | fzf)'
@@ -150,9 +139,7 @@ alias pn="pnpm"
 export VISUAL=nvim;
 export EDITOR=nvim;
 
-
-source .oh-my-zsh/custom/themes/powerlevel10k
-
+source "$ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -232,3 +219,25 @@ alias n=note
 alias oc=codewiz
 
 export GOOGLE_CLOUD_PROJECT="charged-mind-187506"
+
+
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_ALL_DUPS  # 去除重复命令
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS    # 去除多余空格
+setopt SHARE_HISTORY         # 多终端共享历史
+setopt INC_APPEND_HISTORY    # 实时追加而非退出时写入
+
+
+# 在 vi 模式下切换光标形状
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]] || [[ $1 == 'block' ]]; then
+    echo -ne '\e[2 q'  # block cursor for normal mode
+  else
+    echo -ne '\e[6 q'  # beam cursor for insert mode
+  fi
+}
+zle -N zle-keymap-select
+echo -ne '\e[6 q'  # 默认 beam cursor
