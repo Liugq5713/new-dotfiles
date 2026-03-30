@@ -1,0 +1,66 @@
+# -- general
+#
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+unbind C-c
+
+# 显示状态栏
+# set-hook -g session-window-changed 'run-shell "tmux set-option status on; sleep 2; tmux set-option status off"'
+#
+# -- windows & pane creation ---------------------------------------------------
+
+# new window retains current path, possible values are:
+#   - true
+#   - false (default)
+tmux_conf_new_window_retain_current_path=true
+
+# new pane retains current path, possible values are:
+#   - true (default)
+#   - false
+tmux_conf_new_pane_retain_current_path=true
+
+# new pane tries to reconnect ssh sessions (experimental), possible values are:
+#   - true
+#   - false (default)
+tmux_conf_new_pane_reconnect_ssh=false
+
+# prompt for session name when creating a new session, possible values are:
+#   - true
+#   - false (default)
+tmux_conf_new_session_prompt=false
+
+continuum_auto_save='#(~/.config/tmux/plugins/tmux-continuum/scripts/continuum_save.sh)'
+
+tmux_conf_copy_to_os_clipboard=false
+
+bind s choose-tree -Zs -O name
+
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-restore 'on'
+
+set -g @plugin 'fabioluciano/tmux-tokyo-night'
+set -wg window-status-separator 'none'
+set -g @theme_variation 'night'
+# set -g @theme_plugins 'datetime'  # 旧 API，已废弃
+set -g @powerkit_plugins "git,datetime"
+
+set -g @theme_left_separator ''
+set -g @theme_right_separator ''
+
+# 窗口名跟随当前目录，关闭自动重命名防止 tmux 用命令名覆盖
+setw -g automatic-rename off
+
+# 状态栏位置 (PowerKit/tmux-tokyo-night 默认是 top，这里覆盖为 bottom)
+set -g @powerkit_status_position "bottom"
+
+# 覆盖 PowerKit 的 reload 绑定，避免与 oh-my-tmux 的 _apply_bindings 冲突
+# PowerKit 原始绑定中包含裸的 "tmux source-file" shell 命令，
+# 被 oh-my-tmux dump 后当作 tmux 内部命令解析，导致 "unknown command: tmux" 报错
+bind r run '"$TMUX_PROGRAM" ${TMUX_SOCKET:+-S "$TMUX_SOCKET"} source "$TMUX_CONF"' \; display "#{TMUX_CONF} sourced" #!important

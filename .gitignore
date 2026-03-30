@@ -1,0 +1,8 @@
+# Tmux plugins (installed by tpm at runtime)
+tmux/.config/tmux/plugins/
+
+# Neovim plugin cache and state
+nvim/.config/nvim/plugin/
+
+# OS files
+.DS_Store

@@ -1,0 +1,6 @@
+{
+  "flex-vertical-center": {
+    "prefix": ["fvc"],
+    "body": "display: flex;\n justify-content: center;\n align-items: center;\n"
+  }
+}

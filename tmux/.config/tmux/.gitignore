@@ -1,0 +1,5 @@
+# tpm 管理的插件目录，通过 tpm 自动安装，不纳入版本控制
+plugins/
+
+# tmux-resurrect 会话保存数据
+resurrect/
