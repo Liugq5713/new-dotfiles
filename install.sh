@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(nvim tmux alacritty zsh)
+PACKAGES=(nvim tmux alacritty zsh codewiz)
 
 info() { printf "\033[34m[INFO]\033[0m %s\n" "$1"; }
 warn() { printf "\033[33m[WARN]\033[0m %s\n" "$1"; }

@@ -1,0 +1,10 @@
+# 运行时依赖（由 bun/npm 管理）
+node_modules/
+package.json
+bun.lock
+
+# 日志文件
+logs/
+
+# 知识库数据（目前为空，保留目录结构）
+# data/
