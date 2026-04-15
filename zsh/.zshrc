@@ -218,6 +218,15 @@ note() {
 alias n=note
 alias oc=codewiz
 
+# codewiz run 快捷入口：直接问问题，不用加引号
+ocl() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: ocl <your question>"
+    return 1
+  fi
+  codewiz run " , 下面是我的问题: $*"
+}
+
 export GOOGLE_CLOUD_PROJECT="charged-mind-187506"
 
 

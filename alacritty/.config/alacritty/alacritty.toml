@@ -1,16 +1,15 @@
-# #1 主题：import 引用而非内联，方便一键切换主题
-import = [
-  "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
-]
-
 # #1 自定义背景色覆盖（import 之后的同 key 会覆盖主题值）
 # 原始 storm 主题为 #24283b，这里微调为稍深的蓝灰
 [colors.primary]
 background = '#23283a'
 
 # #6 显式声明，方便调试时临时关闭
+# #1 主题：import 引用而非内联，方便一键切换主题（0.17+ 要求放在 general 下）
 [general]
 live_config_reload = true
+import = [
+  "~/.config/alacritty/themes/themes/tokyo_night_storm.toml"
+]
 
 # #2 TERM 保留 xterm-256color，需配合 tmux 的 terminal-overrides 启用 true color
 [env]
@@ -64,3 +63,18 @@ action = "None"
 [selection]
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+# URL 链接识别与点击：Command+点击 打开链接（tmux mouse on 下也能用）
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Command|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "Command"

@@ -12,6 +12,9 @@ return {
           ".DS_Store",
           "thumbs.db",
         },
+        hide_by_pattern = {
+          "*.embedding",
+        },
         never_show = {},
       },
     },
