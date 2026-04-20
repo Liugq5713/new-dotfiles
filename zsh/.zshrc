@@ -205,15 +205,18 @@ _tmux_rename_window_to_dir
 
 # note [内容] → 记录到 Apple 备忘录，无参数时打开 vim 编辑
 note() {
-  local body tmpfile
+  local body raw tmpfile
   if [[ $# -eq 0 ]]; then
     tmpfile=$(mktemp) && ${EDITOR:-vim} "$tmpfile" && body=$(<"$tmpfile"); rm -f "$tmpfile"
     [[ -z "$body" ]] && { echo "已取消"; return 1; }
   else
     body="$*"
   fi
+  raw="$body"
   body="${body//\"/\\\"}" && body="${body//$'\n'/<br>}"
-  osascript -e "tell application \"Notes\" to make new note at folder \"Notes\" with properties {body:\"${body}\"}" >/dev/null && echo "已记录"
+  osascript -e "tell application \"Notes\" to make new note at folder \"Notes\" with properties {body:\"${body}\"}" >/dev/null \
+    && printf '%s' "$raw" | pbcopy \
+    && echo "已记录（已复制到剪贴板）"
 }
 alias n=note
 alias oc=codewiz
