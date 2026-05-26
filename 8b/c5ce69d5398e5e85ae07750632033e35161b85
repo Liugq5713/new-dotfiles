@@ -1,0 +1,24 @@
+tmux/.config/tmux/codewiz.sh
+  s_59f8ffcbdeeb67::t_7f491ca6b57a6e 131-132,134,139
+  s_59f8ffcbdeeb67::t_b9861043eaacab 115-117,120-123
+  s_59f8ffcbdeeb67::t_17937f1e4532bf 1-51,53-114,118-119,124-130,133,135-138,140
+  s_59f8ffcbdeeb67::t_329735c6a2f921 52
+tmux/.config/tmux/tmux.conf
+  s_59f8ffcbdeeb67::t_370d2e22df94f9 151-155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "8bc5ce69d5398e5e85ae07750632033e35161b85",
+  "prompts": {},
+  "sessions": {
+    "s_59f8ffcbdeeb67": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19baf2839ffe1fwZqxmjnIFZwe",
+        "model": "Claude-4.6-sonnet"
+      },
+      "human_author": "liuguangqi <liuguangqi@xiaohongshu.com>"
+    }
+  }
+}
