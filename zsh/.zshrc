@@ -220,6 +220,8 @@ note() {
 }
 alias n=note
 alias oc=codewiz
+alias cc='codewiz-cc --dangerously-skip-permissions'
+
 
 # codewiz run 快捷入口：直接问问题，不用加引号
 ocl() {
@@ -253,3 +255,6 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 echo -ne '\e[6 q'  # 默认 beam cursor
+
+# Added by git-ai installer on Tue May 26 15:06:54 CST 2026
+export PATH="/Users/liuguangqi/.git-ai/bin:$PATH"
