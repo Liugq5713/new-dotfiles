@@ -1,0 +1,49 @@
+tmux/.config/tmux/codewiz.sh
+  s_59f8ffcbdeeb67::t_1ccf345536b257 90
+zsh/.zshrc
+  s_1dfe89144a773b::t_c8aa625665b8d4 239
+  s_76e998dad0765d::t_a51998cb9e5ab7 196,198-216
+  s_1dfe89144a773b::t_6b839fe5db4e34 167,277-279
+tmux/.config/tmux/tmux.conf
+  s_fdd96a7188a239::t_27a2193476a6b7 57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "db469bc753c6ed9e551d0f4637aa77206ab6307f",
+  "prompts": {},
+  "sessions": {
+    "s_1dfe89144a773b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "98ce6410-c223-4a61-a9cf-7d6ce63067ae",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "liuguangqi <liuguangqi@xiaohongshu.com>"
+    },
+    "s_59f8ffcbdeeb67": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_19baf2839ffe1fwZqxmjnIFZwe",
+        "model": "Claude-4.6-sonnet"
+      },
+      "human_author": "liuguangqi <liuguangqi@xiaohongshu.com>"
+    },
+    "s_76e998dad0765d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0234961e-c696-4982-bef7-f576fdc569af",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "liuguangqi <liuguangqi@xiaohongshu.com>"
+    },
+    "s_fdd96a7188a239": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4bef9123-1a0e-4a62-b543-c75121d3882c",
+        "model": "unknown"
+      },
+      "human_author": "liuguangqi <liuguangqi@xiaohongshu.com>"
+    }
+  }
+}
