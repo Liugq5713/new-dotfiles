@@ -164,6 +164,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 export LANG="en_US.UTF-8" 
+export WEREAD_API_KEY="wrk-xMr_FlGNRh6ZsUBZKHveawAA"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -192,15 +193,29 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 
-# tmux 窗口名跟随当前目录（只显示 basename）
-# 用 chpwd 而不是 precmd，因为只需要在目录切换时更新，避免每次按回车都触发
+# tmux 窗口名：统计所有 pane 的目录 basename，取票数最多的；平票时当前 pane 胜出
 _tmux_rename_window_to_dir() {
-  if [[ -n "$TMUX" ]]; then
-    tmux rename-window "$(basename "$PWD")"
-  fi
+  [[ -z "$TMUX" ]] && return
+
+  local -A counts
+  local dir name
+  while IFS= read -r dir; do
+    name=$(basename "$dir")
+    (( counts[$name]++ ))
+  done < <(tmux list-panes -F '#{pane_current_path}')
+
+  local best_name=$(basename "$PWD")
+  local best_count=0
+  for name count in "${(kv)counts[@]}"; do
+    if (( count > best_count )); then
+      best_count=$count
+      best_name=$name
+    fi
+  done
+
+  tmux rename-window "$best_name"
 }
 add-zsh-hook chpwd _tmux_rename_window_to_dir
-# 初始化一次，确保新开窗口也生效
 _tmux_rename_window_to_dir
 
 # note [内容] → 记录到 Apple 备忘录，无参数时打开 vim 编辑
@@ -221,6 +236,7 @@ note() {
 alias n=note
 alias oc=codewiz
 alias cc='codewiz-cc --dangerously-skip-permissions'
+alias claude='codewiz-cc --dangerously-skip-permissions'
 
 
 # codewiz run 快捷入口：直接问问题，不用加引号
@@ -258,3 +274,6 @@ echo -ne '\e[6 q'  # 默认 beam cursor
 
 # Added by git-ai installer on Tue May 26 15:06:54 CST 2026
 export PATH="/Users/liuguangqi/.git-ai/bin:$PATH"
+
+# OpenClaw Completion
+source "/Users/liuguangqi/.openclaw/completions/openclaw.zsh"

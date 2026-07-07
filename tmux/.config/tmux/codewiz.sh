@@ -87,7 +87,7 @@ plugin_get_health() {
     fi
 }
 
-plugin_get_icon() { get_option "icon"; }
+plugin_get_icon() { printf ''; }
 
 # =============================================================================
 # Plugin Contract: Data Collection
